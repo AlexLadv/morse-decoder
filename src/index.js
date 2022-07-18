@@ -36,9 +36,26 @@ const MORSE_TABLE = {
     '----.':  '9',
     '-----':  '0',
 };
-
+  
 function decode(expr) {
-    // write your solution here
+
+  let morseArr = [];
+  for (let i = 0; i < expr.length; i = i + 10) {
+      morseArr.push(expr.slice(i, i + 10));
+  }
+  let result = morseArr.map((item) => {
+    let freeBits = item.replace(/00/g, '')
+                       .replace(/10/g, '.')
+                       .replace(/11/g, '-')
+                       .replace('**********', ' ')
+    if (MORSE_TABLE.hasOwnProperty(freeBits)) {
+      return MORSE_TABLE[freeBits];
+    } else {
+      return freeBits;  
+    }
+
+  });  
+  return result.join('')
 }
 
 module.exports = {
